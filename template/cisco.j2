@@ -1,0 +1,19 @@
+{# update ansible.cfg extensions #}
+{# jinja2_extensions = jinja2.ext.do #} 
+{% set stuff = interface_facts  %}
+{% for i in stuff %}
+{% for j in mac_address_facts %}
+{% if i.data.name == j.data.name %}
+{% do i.data.update({'mac': j.data.mac }) %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% for i in stuff %}
+{% if i.data.mac is defined %}
+{% for k in ip_arp_facts %}
+{% if  (i.data.mac == k.data.mac) and (i.data.CRC != "0") %}
+"{{ i.data.name }}" , "{{ i.data.Speed }}", "{{ i.data.Duplex }}", "{{ i.data.CRC }}","{{ i.data.packet_input }} ", "{{ i.data.mac }}","{{ k.data.ip }}", "{{ inventory_hostname }}"
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}

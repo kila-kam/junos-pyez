@@ -1,0 +1,8 @@
+{% set f=junos_facts.ansible_facts %}
+"{{ ansible_net_hostname }}","{{ f.ansible_net_version }}","{{ f.ansible_net_has_2RE }}",
+{%-  if  f.ansible_net_model == "srx1500" %}
+"{{ f.ansible_net_serialnum }}","{{ f.ansible_net_model }}"
+{%- else %}
+{%- for i in  f.ansible_net_routing_engines %}"{{ f["ansible_net_routing_engines"][i]["serial_number"] }}","{{ f["ansible_net_routing_engines"][i]["model"] }}",
+{%- endfor %}
+{%- endif %}

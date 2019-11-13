@@ -1,0 +1,23 @@
+{%- for i in my_vlans %}
+set vlans {{ i.vlan_name }} vlan-id {{ i.vlan_id }}
+{%- if i.vlan_name  == "MGMT"  %}
+set vlans {{ i.vlan_name }} l3-interface irb.{{ i.vlan_id }}
+set interfaces irb unit {{ i.vlan_id }} description "Internal Management"
+set interfaces irb unit {{ i.vlan_id }} family inet address {{ src_ip }}/24
+{%- endif %}
+{%- endfor %}
+
+
+#virtual chassis
+set virtual-chassis preprovisioned
+set virtual-chassis no-split-detection
+{%- for i in my_routing_engine %}
+{%- if loop.index == 1 or loop.index == 2  %}
+set virtual-chassis member {{ loop.index - 1  }} role routing-engine
+set virtual-chassis member {{ loop.index - 1 }} serial-number {{ i }}
+{%- elif loop.index != 2  %}
+set virtual-chassis member {{ loop.index -1 }} role line-card
+set virtual-chassis member {{ loop.index -1 }} serial-number {{ i }}
+{%- endif %}
+{%- endfor %}
+

@@ -1,0 +1,12 @@
+#virtual chassis
+set virtual-chassis preprovisioned
+set virtual-chassis no-split-detection
+{%- for i in my_routing_engine %}
+{%- if loop.index == 1 or loop.index == 2  %}
+set virtual-chassis member {{ loop.index - 1  }} role routing-engine
+set virtual-chassis member {{ loop.index - 1 }} serial-number {{ i }}
+{%- elif loop.index != 2  %}
+set virtual-chassis member {{ loop.index -1 }} role line-card
+set virtual-chassis member {{ loop.index -1 }} serial-number {{ i }}
+{%- endif %}
+{%- endfor %}
