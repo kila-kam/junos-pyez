@@ -7,7 +7,7 @@ password = 'admin'
 
 # generates and loads configuration file on juniper devices
 
-def config_devices(devices='lab.txt'):
+def config_devices(netdevice):
         dev = Device(host=netdevice, user=username,passwd=password,port=22,ssh_config='~/.ssh/config')
         dev.open()
         print('Connecting to device: {}'.format(netdevice))
