@@ -4,7 +4,7 @@ junos automation
 # about this repository
 
 # vMX/QFX
- bgp-states.py: validate BGP peering #
+ bgp-states.py: validate BGP peering 
  
  interface_checks.py: audit interface statistics  
  
