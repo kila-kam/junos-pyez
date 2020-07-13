@@ -1,6 +1,13 @@
-Projects
-1. bgp-states.py: audit bgp sessions
-2. interface_checks.py: audit interface statistics  #need to add junos exceptions
-3. session_checks.py: audit "security flow sessions" 
-4. packet_tracer.py: "show security match-policies" 
-5. mac_vendor.py: "mac vendor lookup on specific VLAN"
+# PyEZ
+junos automation 
+
+# about this repository
+
+# vMX/QFX
+ bgp-states.py: validate BGP peering #
+ interface_checks.py: audit interface statistics  
+ 
+ # vSRX
+ 
+ session_checks.py: validate flows on firewall 
+ packet_tracer.py: packet tracing juniper tool
